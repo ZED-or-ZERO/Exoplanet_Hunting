@@ -12,7 +12,7 @@ The core research question: **does classical signal processing outperform deep l
 
 ---
 
-##   New Feature: Interactive Batch Processing UI
+## Interactive Batch Processing UI
 The project includes a fully functional **Streamlit Web Dashboard** (`app.py`) for real-time inference. 
 * Upload raw flux data (up to 1GB+).
 * Apply Detrending and Fast Fourier Transform on the fly.
@@ -83,10 +83,10 @@ exoplanet-hunting/
 
 ## How to Run
 
-```bash
-
 ### 1. Setup Environment
+
 ```
+bash
 git clone https://github.com/ZED-or-ZERO/Exoplanet_Hunting.git
 cd Exoplanet_Hunting
 ```
