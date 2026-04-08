@@ -40,7 +40,6 @@ venv/
 *.h5
 *.npz
 *.npy
-*.pkl
 *.pickle
 *.parquet
 
