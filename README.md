@@ -12,7 +12,7 @@ The core research question: **does classical signal processing outperform deep l
 
 ---
 
-## 🌟 New Feature: Interactive Batch Processing UI
+##   New Feature: Interactive Batch Processing UI
 The project includes a fully functional **Streamlit Web Dashboard** (`app.py`) for real-time inference. 
 * Upload raw flux data (up to 1GB+).
 * Apply Detrending and Fast Fourier Transform on the fly.
@@ -37,7 +37,7 @@ The project includes a fully functional **Streamlit Web Dashboard** (`app.py`) f
 ## Dataset
 
 - **Source:** [Exoplanet Detection Dataset](https://www.kaggle.com/datasets/ronaldkroening/exoplanet-detection-dataset) via Kaggle
-- **Scale:** 5,899 stars · 4,608 time steps · binary classification (planet / no planet)
+- **Scale:** 6,000 stars · 4,608 time steps · binary classification (planet / no planet)
 - **Preprocessed data & model weights:** [Google Drive](https://drive.google.com/drive/folders/1Bq1bLAs5mcZg8LKSCG_P3ACppRvxIGIx?usp=sharing)
 
 ---
@@ -66,41 +66,48 @@ exoplanet-hunting/
 ├── app.py                    # Streamlit Web Dashboard for interactive inference
 ├── train.py                  # Training script for Random Forest baseline
 ├── train_cnn.py              # Training script for 1D-CNN PyTorch model
-├── data/
-│   ├── raw/                  # Source CSV files
-│   └── processed/            # Cleaned time series and FFT features
+├── data/                     # Google Drive link for datasets
+│   ├── raw/                  # Source CSV files from Kaggle 
+│   └── processed/            # Cleaned time series and FFT features (Google Drive link)
 ├── models/                   # Saved model weights (.pkl and .pth)
 ├── notebooks/                # Jupyter notebooks for R&D (01–05)
 ├── src/
+    ├── data_loader.py        # Data loading and batching logic
 │   ├── preprocessing.py      # Interpolation and detrending logic
 │   ├── features.py           # FFT feature extraction
-│   └── cnn_architecture.py   # PyTorch 1D-CNN class definition
+│   └── model.py              # PyTorch 1D-CNN class definition
 ├── requirements.txt          # Python dependencies
 └── README.md
-
+```
 ---
 
 ## How to Run
 
 ```bash
 
-# 1. Setup Environment
+### 1. Setup Environment
+```
 git clone https://github.com/ZED-or-ZERO/Exoplanet_Hunting.git
 cd Exoplanet_Hunting
+```
 
-# 2. Install dependencies
+### 2. Install dependencies
+```
 pip install -r requirements.txt
+```
 
-# 3. Launch the Web Interface (Recommended)
+### 3. Launch the Web Interface (Recommended)
+```
 streamlit run app.py
+```
 
-# 4. Retrain Models from Scratch
+### 4. Retrain Models from Scratch
 #If you want to reproduce the training process:
 
+```
 # Train Random Forest
 python train.py
 
 # Train 1D-CNN
 python train_cnn.py
-
 ```
