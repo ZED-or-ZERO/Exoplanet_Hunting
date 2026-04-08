@@ -1,7 +1,7 @@
 # Exoplanet Detection via Transit Photometry
 
 ---
-![demo](assets/transit.gif) 
+![demo](notebooks/drafts/transit.gif) 
 ---
 
 ## Overview
