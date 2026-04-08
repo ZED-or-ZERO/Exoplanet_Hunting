@@ -72,7 +72,7 @@ exoplanet-hunting/
 ├── models/                   # Saved model weights (.pkl and .pth)
 ├── notebooks/                # Jupyter notebooks for R&D (01–05)
 ├── src/
-    ├── data_loader.py        # Data loading and batching logic
+│   ├── data_loader.py        # Data loading and batching logic
 │   ├── preprocessing.py      # Interpolation and detrending logic
 │   ├── features.py           # FFT feature extraction
 │   └── model.py              # PyTorch 1D-CNN class definition
@@ -102,12 +102,8 @@ streamlit run app.py
 ```
 
 ### 4. Retrain Models from Scratch
-#If you want to reproduce the training process:
+If you want to reproduce the training process:
 
 ```
-# Train Random Forest
+# Train Random Forest and 1D-CNN
 python train.py
-
-# Train 1D-CNN
-python train_cnn.py
-```

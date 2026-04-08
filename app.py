@@ -25,6 +25,7 @@ st.markdown("Upload raw datasets to process and detect exoplanets using Machine 
 # 2. Сайдбар: Загрузка файлов и выбор модели
 # ==========================================
 with st.sidebar:
+
     st.header("1. Upload Datasets")
     flux_file = st.file_uploader("Upload Raw Flux (CSV)", type="csv")
     time_file = st.file_uploader("Upload Time (CSV)", type="csv")
@@ -35,8 +36,25 @@ with st.sidebar:
         "Choose Inference Engine:",
         ("Random Forest (Classic ML)", "1D-CNN (Deep Learning)")
     )
-    
-    start_button = st.button("🚀 Start Batch Processing", use_container_width=True)
+
+    # st.markdown("---")
+    # st.subheader("Don't have files?")
+    # use_demo = st.checkbox("Use Demo Datasets (Fast check)")
+
+    start_button = st.button("Start Batch Processing", use_container_width=True)
+
+    # if start_button:
+    #     if use_demo:
+    #         st.info("Loading built-in demo files...")
+    #         flux_file = pd.read_csv("data/raw/Astro_Flux_Data.csv")
+    #         time_file = pd.read_csv("data/raw/Astro_Time_Data.csv")
+    #         features_file = pd.read_csv("data/raw/features_dataset.csv")
+    #         # (заглушки для time и features, так как для CNN нужен только flux)
+    #         total_rows = len(flux_file)
+    #         # ... дальше идет пайплайн
+    #     elif not (flux_file and time_file and features_file):
+    #         st.error("Please upload all three CSV files or check 'Use Demo Datasets'.")
+
 
 # ==========================================
 # 3. Кэшированные функции (Performance Optimization)
@@ -49,7 +67,6 @@ def load_rf_model():
 def load_cnn_model():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = ExoplanetCNN().to(device)
-    # Предполагается, что ты сохранил веса через torch.save(model.state_dict(), 'models/cnn_weights.pth')
     model.load_state_dict(torch.load('models/cnn_weights.pth', map_location=device))
     model.eval()
     return model, device
@@ -62,7 +79,7 @@ if start_button:
         st.error("Please upload all three CSV files to begin processing.")
     else:
         try:
-            # Чтение файлов (Data Loading)
+            # Data Loading
             with st.spinner("Loading 1GB datasets into memory..."):
                 flux_df = pd.read_csv(flux_file)
                 time_df = pd.read_csv(time_file)
@@ -105,11 +122,11 @@ if start_button:
             
             my_bar.progress(1.0, text="Preprocessing complete!")
             
-            # Сохранение чистого датасета (Exporting clean_data.csv)
+            # Exporting clean_data.csv
             with st.spinner("Saving processed data to clean_data.csv..."):
                 clean_flux_df = pd.DataFrame(processed_flux_list)
-                clean_flux_df.to_csv("clean_data.csv", index=False)
-                st.info("💾 Processed signals saved locally as `clean_data.csv`.")
+                clean_flux_df.to_csv("production/clean_data.csv", index=False)
+                st.info("Processed signals saved locally as `clean_data.csv`.")
 
             # ==========================================
             # 5. Машинное обучение (Inference)
